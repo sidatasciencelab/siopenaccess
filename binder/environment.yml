@@ -1,6 +1,5 @@
 name: siopenaccess
 channels:
-  - pytorch 
   - conda-forge
 dependencies:
   - s3fs=0.4.2
@@ -8,9 +7,6 @@ dependencies:
   - humanize=2.4.0
   - umap-learn=0.4.3
   - matplotlib=3
-  - pytorch=1.4.0
-  - torchvision=0.5.0
-  - cpuonly=1.0
   - jupyterlab=2.1.4
   - nodejs
   - dask-labextension=1.1.0
