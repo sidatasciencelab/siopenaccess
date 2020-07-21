@@ -1,0 +1,147 @@
+{
+  "id": "edanmdm-saam_1971.439.94",
+  "version": "",
+  "unitCode": "SAAM",
+  "linkedId": "0",
+  "type": "edanmdm",
+  "content": {
+    "descriptiveNonRepeating": {
+      "record_ID": "saam_1971.439.94",
+      "online_media": {
+        "mediaCount": 1,
+        "media": [
+          {
+            "thumbnail": "http://ids.si.edu/ids/deliveryService?id=SAAM-1971.439.94_1",
+            "idsId": "SAAM-1971.439.94_1",
+            "usage": {
+              "access": "CC0"
+            },
+            "guid": "http://n2t.net/ark:/65665/bj992c82692-2156-4c18-afee-bd08d92b590a",
+            "type": "Images",
+            "content": "http://ids.si.edu/ids/deliveryService?id=SAAM-1971.439.94_1",
+            "resources": [
+              {
+                "label": "High-resolution TIFF",
+                "url": "https://ids.si.edu/ids/download?id=SAAM-1971.439.94_1.tif"
+              },
+              {
+                "label": "High-resolution JPEG (2251x2251)",
+                "url": "https://ids.si.edu/ids/download?id=SAAM-1971.439.94_1.jpg"
+              },
+              {
+                "label": "Screen Image",
+                "url": "https://ids.si.edu/ids/download?id=SAAM-1971.439.94_1_screen"
+              },
+              {
+                "label": "Thumbnail Image",
+                "url": "https://ids.si.edu/ids/download?id=SAAM-1971.439.94_1_thumb"
+              }
+            ]
+          }
+        ]
+      },
+      "unit_code": "SAAM",
+      "title_sort": "CALAVERA FOR THE POLICEMAN",
+      "guid": "http://n2t.net/ark:/65665/vk7323e8ffa-fe0d-4000-abf9-2f9c1ad6c49b",
+      "record_link": "http://americanart.si.edu/collections/search/artwork/?id=19888",
+      "title": {
+        "label": "Title",
+        "content": "Calavera for the Policeman"
+      },
+      "metadata_usage": {
+        "access": "CC0"
+      },
+      "data_source": "Smithsonian American Art Museum"
+    },
+    "indexedStructured": {
+      "object_type": [
+        "Graphic arts"
+      ],
+      "name": [
+        "Posada, Jos\u00e9 Guadalupe"
+      ],
+      "topic": [
+        "Occupations",
+        "Service",
+        "Policeman",
+        "Skeleton"
+      ],
+      "usage_flag": [
+        "permcoll"
+      ],
+      "online_media_type": [
+        "Images"
+      ]
+    },
+    "freetext": {
+      "setName": [
+        {
+          "label": "See more items in",
+          "content": "Smithsonian American Art Museum Collection"
+        },
+        {
+          "label": "Department",
+          "content": "Graphic Arts"
+        }
+      ],
+      "identifier": [
+        {
+          "label": "Object number",
+          "content": "1971.439.94"
+        }
+      ],
+      "creditLine": [
+        {
+          "label": "Credit Line",
+          "content": "Smithsonian American Art Museum, Gift of Jack Lord"
+        }
+      ],
+      "name": [
+        {
+          "label": "Artist",
+          "content": "Jos\u00e9 Guadalupe Posada, Mexican, Aguascalientes, Mexico 1852-died Mexico City, Mexico 1913"
+        }
+      ],
+      "topic": [
+        {
+          "label": "Topic",
+          "content": "Occupation\\service\\policeman"
+        },
+        {
+          "label": "Topic",
+          "content": "Skeleton"
+        }
+      ],
+      "physicalDescription": [
+        {
+          "label": "Medium",
+          "content": "woodcut"
+        }
+      ],
+      "dataSource": [
+        {
+          "label": "Data Source",
+          "content": "Smithsonian American Art Museum"
+        }
+      ],
+      "objectRights": [
+        {
+          "label": "Restrictions & Rights",
+          "content": "CC0"
+        }
+      ],
+      "objectType": [
+        {
+          "label": "Type",
+          "content": "Graphic Arts-Print"
+        }
+      ]
+    }
+  },
+  "url": "edanmdm:saam_1971.439.94",
+  "hash": "002336a21b739d08cbe69621658ae6f9af99a305",
+  "docSignature": "cb88c162ef6cfd48131cb653ac71cfeb6a7fffb8_8ddc66a424ab35ff746bb3c87d9f1f21",
+  "timestamp": 1583487418,
+  "lastTimeUpdated": 1583487399,
+  "title": "Calavera for the Policeman"
+}
