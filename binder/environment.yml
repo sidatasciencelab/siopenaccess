@@ -5,12 +5,12 @@ dependencies:
   - s3fs=0.4.2
   - dask=2.17.2
   - humanize=2.4.0
-  - umap-learn=0.4.3
+  - umap-learn=0.4
   - matplotlib=3
   - jupyterlab=2.1.4
   - nodejs
   - dask-labextension=1.1.0
+  - pip
   - pip:
     - tensorflow==2.2.0
-prefix: /Users/triznam/miniconda3/envs/siopenaccess
 
