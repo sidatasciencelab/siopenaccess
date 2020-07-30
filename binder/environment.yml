@@ -7,6 +7,7 @@ dependencies:
   - humanize=2.4.0
   - umap-learn=0.4
   - matplotlib=3
+  - python-annoy=1.16
   - jupyterlab=2.1.4
   - nodejs
   - dask-labextension=1.1.0
