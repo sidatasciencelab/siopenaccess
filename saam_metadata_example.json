@@ -1,52 +1,52 @@
 {
-  "id": "edanmdm-saam_1971.439.94",
+  "id": "edanmdm-saam_1929.8.175.19",
   "version": "",
   "unitCode": "SAAM",
   "linkedId": "0",
   "type": "edanmdm",
   "content": {
     "descriptiveNonRepeating": {
-      "record_ID": "saam_1971.439.94",
+      "record_ID": "saam_1929.8.175.19",
       "online_media": {
         "mediaCount": 1,
         "media": [
           {
-            "thumbnail": "http://ids.si.edu/ids/deliveryService?id=SAAM-1971.439.94_1",
-            "idsId": "SAAM-1971.439.94_1",
+            "thumbnail": "https://ids.si.edu/ids/deliveryService?id=SAAM-1929.8.175.19_1",
+            "idsId": "SAAM-1929.8.175.19_1",
             "usage": {
               "access": "CC0"
             },
-            "guid": "http://n2t.net/ark:/65665/bj992c82692-2156-4c18-afee-bd08d92b590a",
+            "guid": "http://n2t.net/ark:/65665/bj902eec5f5-91e9-44e2-8c19-591a33181cc4",
             "type": "Images",
-            "content": "http://ids.si.edu/ids/deliveryService?id=SAAM-1971.439.94_1",
+            "content": "https://ids.si.edu/ids/deliveryService?id=SAAM-1929.8.175.19_1",
             "resources": [
               {
                 "label": "High-resolution TIFF",
-                "url": "https://ids.si.edu/ids/download?id=SAAM-1971.439.94_1.tif"
+                "url": "https://ids.si.edu/ids/download?id=SAAM-1929.8.175.19_1.tif"
               },
               {
-                "label": "High-resolution JPEG (2251x2251)",
-                "url": "https://ids.si.edu/ids/download?id=SAAM-1971.439.94_1.jpg"
+                "label": "High-resolution JPEG (2200x3000)",
+                "url": "https://ids.si.edu/ids/download?id=SAAM-1929.8.175.19_1.jpg"
               },
               {
                 "label": "Screen Image",
-                "url": "https://ids.si.edu/ids/download?id=SAAM-1971.439.94_1_screen"
+                "url": "https://ids.si.edu/ids/download?id=SAAM-1929.8.175.19_1_screen"
               },
               {
                 "label": "Thumbnail Image",
-                "url": "https://ids.si.edu/ids/download?id=SAAM-1971.439.94_1_thumb"
+                "url": "https://ids.si.edu/ids/download?id=SAAM-1929.8.175.19_1_thumb"
               }
             ]
           }
         ]
       },
       "unit_code": "SAAM",
-      "title_sort": "CALAVERA FOR THE POLICEMAN",
-      "guid": "http://n2t.net/ark:/65665/vk7323e8ffa-fe0d-4000-abf9-2f9c1ad6c49b",
-      "record_link": "http://americanart.si.edu/collections/search/artwork/?id=19888",
+      "title_sort": "NECKLACE",
+      "guid": "http://n2t.net/ark:/65665/vk780404571-5188-4590-ab8a-af39acc86617",
+      "record_link": "https://americanart.si.edu/collections/search/artwork/?id=29819",
       "title": {
         "label": "Title",
-        "content": "Calavera for the Policeman"
+        "content": "Necklace"
       },
       "metadata_usage": {
         "access": "CC0"
@@ -55,16 +55,7 @@
     },
     "indexedStructured": {
       "object_type": [
-        "Graphic arts"
-      ],
-      "name": [
-        "Posada, Jos\u00e9 Guadalupe"
-      ],
-      "topic": [
-        "Occupations",
-        "Service",
-        "Policeman",
-        "Skeleton"
+        "Decorative arts"
       ],
       "usage_flag": [
         "permcoll"
@@ -81,41 +72,41 @@
         },
         {
           "label": "Department",
-          "content": "Graphic Arts"
+          "content": "Decorative Arts"
+        }
+      ],
+      "date": [
+        {
+          "label": "Date",
+          "content": "100 B.C.-100 A.D."
         }
       ],
       "identifier": [
         {
           "label": "Object number",
-          "content": "1971.439.94"
+          "content": "1929.8.175.19"
         }
       ],
       "creditLine": [
         {
           "label": "Credit Line",
-          "content": "Smithsonian American Art Museum, Gift of Jack Lord"
+          "content": "Smithsonian American Art Museum, Gift of John Gellatly"
         }
       ],
       "name": [
         {
           "label": "Artist",
-          "content": "Jos\u00e9 Guadalupe Posada, Mexican, Aguascalientes, Mexico 1852-died Mexico City, Mexico 1913"
-        }
-      ],
-      "topic": [
-        {
-          "label": "Topic",
-          "content": "Occupation\\service\\policeman"
-        },
-        {
-          "label": "Topic",
-          "content": "Skeleton"
+          "content": "Unidentified"
         }
       ],
       "physicalDescription": [
         {
           "label": "Medium",
-          "content": "woodcut"
+          "content": "faience and glass"
+        },
+        {
+          "label": "Dimensions",
+          "content": "length: 15 in. (38.0 cm)"
         }
       ],
       "dataSource": [
@@ -133,15 +124,15 @@
       "objectType": [
         {
           "label": "Type",
-          "content": "Graphic Arts-Print"
+          "content": "Decorative Arts-Jewelry"
         }
       ]
     }
   },
-  "url": "edanmdm:saam_1971.439.94",
-  "hash": "002336a21b739d08cbe69621658ae6f9af99a305",
-  "docSignature": "cb88c162ef6cfd48131cb653ac71cfeb6a7fffb8_8ddc66a424ab35ff746bb3c87d9f1f21",
-  "timestamp": 1583487418,
-  "lastTimeUpdated": 1583487399,
-  "title": "Calavera for the Policeman"
+  "url": "edanmdm:saam_1929.8.175.19",
+  "hash": "000cd1d19d96a143f2bd96cb4fa84858412b0aff",
+  "docSignature": "2eb7340122fbb8c7e99400ad395bf08da0c3d165_825284221240d07736f98cddf7655759",
+  "timestamp": 1618820978,
+  "lastTimeUpdated": 1618820978,
+  "title": "Necklace"
 }
