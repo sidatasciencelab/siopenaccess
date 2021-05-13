@@ -1,0 +1,1768 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Using SI Open Access Data on AWS to cluster and search against American Art paintings &#8212; My Jupyter Book</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+    
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/SI Open Access SAAM S3 Example.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/SI Open Access SAAM S3 Example.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-dask-to-parse-and-filter-collections-metadata-on-aws">
+   Using Dask to parse and filter collections metadata on AWS
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dask-intro">
+     Dask intro
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#download-image-files-from-s3">
+   Download image files from S3
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#producing-image-feature-vectors-with-tensorflow">
+   Producing image feature vectors with TensorFlow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#clustering-images-with-umap">
+   Clustering images with UMAP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#searching-for-semantically-similar-paintings-using-annoy">
+   Searching for semantically similar paintings using Annoy
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="using-si-open-access-data-on-aws-to-cluster-and-search-against-american-art-paintings">
+<h1>Using SI Open Access Data on AWS to cluster and search against American Art paintings<a class="headerlink" href="#using-si-open-access-data-on-aws-to-cluster-and-search-against-american-art-paintings" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>In this notebook, we will show how to use the Smithsonian Open Access dataset on AWS, by demonstrating an end-to-end example of filtering metadata, downloading images, and then processing them to produce a cluster representation.</p>
+</div>
+<div class="section" id="using-dask-to-parse-and-filter-collections-metadata-on-aws">
+<h2>Using Dask to parse and filter collections metadata on AWS<a class="headerlink" href="#using-dask-to-parse-and-filter-collections-metadata-on-aws" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we will use Dask and s3fs to process metadata files stored on AWS.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="kn">import</span> <span class="nn">dask.bag</span> <span class="k">as</span> <span class="nn">db</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">s3fs</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">humanize</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using s3fs, we can list the top-level “directories” in the “smithsonian-open-access” S3 bucket. We can see that the bucket is split between metadata files and media files.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fs</span> <span class="o">=</span> <span class="n">s3fs</span><span class="o">.</span><span class="n">S3FileSystem</span><span class="p">(</span><span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fs</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="s1">&#39;smithsonian-open-access&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;smithsonian-open-access/media&#39;, &#39;smithsonian-open-access/metadata&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Taking a closer look inside the media directory, we can see that metadata files are organized by Smithsonian unit code. This is really helpful if you would like to work with files from just one unit, like in this case where we will be focusing on paintings from the Smithsonian American Art Museum (SAAM).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="s1">&#39;smithsonian-open-access/metadata/edan&#39;</span><span class="p">)</span>
+<span class="n">metadata</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;smithsonian-open-access/metadata/edan/aaa&#39;,
+ &#39;smithsonian-open-access/metadata/edan/acah&#39;,
+ &#39;smithsonian-open-access/metadata/edan/acm&#39;,
+ &#39;smithsonian-open-access/metadata/edan/cfchfolklife&#39;,
+ &#39;smithsonian-open-access/metadata/edan/chndm&#39;,
+ &#39;smithsonian-open-access/metadata/edan/eepa&#39;,
+ &#39;smithsonian-open-access/metadata/edan/fbr&#39;,
+ &#39;smithsonian-open-access/metadata/edan/fs&#39;,
+ &#39;smithsonian-open-access/metadata/edan/fsa&#39;,
+ &#39;smithsonian-open-access/metadata/edan/fsg&#39;,
+ &#39;smithsonian-open-access/metadata/edan/hac&#39;,
+ &#39;smithsonian-open-access/metadata/edan/hmsg&#39;,
+ &#39;smithsonian-open-access/metadata/edan/hsfa&#39;,
+ &#39;smithsonian-open-access/metadata/edan/index.txt&#39;,
+ &#39;smithsonian-open-access/metadata/edan/naa&#39;,
+ &#39;smithsonian-open-access/metadata/edan/nasm&#39;,
+ &#39;smithsonian-open-access/metadata/edan/nasmac&#39;,
+ &#39;smithsonian-open-access/metadata/edan/nmaahc&#39;,
+ &#39;smithsonian-open-access/metadata/edan/nmafa&#39;,
+ &#39;smithsonian-open-access/metadata/edan/nmah&#39;,
+ &#39;smithsonian-open-access/metadata/edan/nmai&#39;,
+ &#39;smithsonian-open-access/metadata/edan/nmnhanthro&#39;,
+ &#39;smithsonian-open-access/metadata/edan/nmnhbirds&#39;,
+ &#39;smithsonian-open-access/metadata/edan/nmnhbotany&#39;,
+ &#39;smithsonian-open-access/metadata/edan/nmnheducation&#39;,
+ &#39;smithsonian-open-access/metadata/edan/nmnhento&#39;,
+ &#39;smithsonian-open-access/metadata/edan/nmnhfishes&#39;,
+ &#39;smithsonian-open-access/metadata/edan/nmnhherps&#39;,
+ &#39;smithsonian-open-access/metadata/edan/nmnhinv&#39;,
+ &#39;smithsonian-open-access/metadata/edan/nmnhmammals&#39;,
+ &#39;smithsonian-open-access/metadata/edan/nmnhminsci&#39;,
+ &#39;smithsonian-open-access/metadata/edan/nmnhpaleo&#39;,
+ &#39;smithsonian-open-access/metadata/edan/npg&#39;,
+ &#39;smithsonian-open-access/metadata/edan/npgcap&#39;,
+ &#39;smithsonian-open-access/metadata/edan/npm&#39;,
+ &#39;smithsonian-open-access/metadata/edan/nzp&#39;,
+ &#39;smithsonian-open-access/metadata/edan/ocio_dpo3d&#39;,
+ &#39;smithsonian-open-access/metadata/edan/saam&#39;,
+ &#39;smithsonian-open-access/metadata/edan/si&#39;,
+ &#39;smithsonian-open-access/metadata/edan/sia&#39;,
+ &#39;smithsonian-open-access/metadata/edan/sil&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Within each unit, metadata is stored in .txt files in JSONL format. Here we see that there are 256 such files in the SAAM metadata directory, each a little over 100 kilobytes in size.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">saam_metadata</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="s1">&#39;smithsonian-open-access/metadata/edan/saam&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">saam_metadata</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">metadata_file</span> <span class="ow">in</span> <span class="n">saam_metadata</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">metadata_file</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">du</span><span class="p">(</span><span class="n">metadata_file</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>257
+smithsonian-open-access/metadata/edan/saam/00.txt
+118.3 kB
+smithsonian-open-access/metadata/edan/saam/01.txt
+152.8 kB
+smithsonian-open-access/metadata/edan/saam/02.txt
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>134.0 kB
+smithsonian-open-access/metadata/edan/saam/03.txt
+146.6 kB
+smithsonian-open-access/metadata/edan/saam/04.txt
+132.2 kB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="dask-intro">
+<h3>Dask intro<a class="headerlink" href="#dask-intro" title="Permalink to this headline">¶</a></h3>
+<p>We will be using the Python Dask library to process this collection of metadata files, because it excels at parallelizing workloads across large numbers of text files, and has built-in support for working with AWS S3 objects.</p>
+<p>The first step to using Dask is to set up a “client” that will orchestrate processing across multiple workers. In this specific example, we use 1 worker and 4 threads per worker, because Binder only provide single CPU environments. If you are running this example on your own machine, feel free to crank these numbers up for better performance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">threads_per_worker</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">client</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/triznam/miniconda3/envs/siopenaccess/lib/python3.8/site-packages/distributed/node.py:151: UserWarning: Port 8787 is already in use.
+Perhaps you already have a cluster running?
+Hosting the HTTP server on port 53841 instead
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output text_html"><table style="border: 2px solid white;">
+<tr>
+<td style="vertical-align: top; border: 0px solid white">
+<h3 style="text-align: left;">Client</h3>
+<ul style="text-align: left; list-style: none; margin: 0; padding: 0;">
+  <li><b>Scheduler: </b>tcp://127.0.0.1:53842</li>
+  <li><b>Dashboard: </b><a href='http://127.0.0.1:53841/status' target='_blank'>http://127.0.0.1:53841/status</a></li>
+</ul>
+</td>
+<td style="vertical-align: top; border: 0px solid white">
+<h3 style="text-align: left;">Cluster</h3>
+<ul style="text-align: left; list-style:none; margin: 0; padding: 0;">
+  <li><b>Workers: </b>1</li>
+  <li><b>Cores: </b>4</li>
+  <li><b>Memory: </b>17.18 GB</li>
+</ul>
+</td>
+</tr>
+</table></div></div>
+</div>
+<p>To process nested JSON data, we use the Dask “bag” datatype, and tell it we want to process all .txt files in the SAAM metadata directory. This command will run instantaneously, because Dask uses a “lazy” execution model. This means that most Dask commands build an execution graph to be run later.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">saam_metadata_s3</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;s3://</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">saam_metadata</span> <span class="k">if</span> <span class="s1">&#39;index.txt&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">path</span><span class="p">]</span>
+<span class="n">saam_metadata_s3</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;s3://smithsonian-open-access/metadata/edan/saam/00.txt&#39;,
+ &#39;s3://smithsonian-open-access/metadata/edan/saam/01.txt&#39;,
+ &#39;s3://smithsonian-open-access/metadata/edan/saam/02.txt&#39;,
+ &#39;s3://smithsonian-open-access/metadata/edan/saam/03.txt&#39;,
+ &#39;s3://smithsonian-open-access/metadata/edan/saam/04.txt&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">saam_metadata_s3</span><span class="p">,</span>
+                 <span class="n">storage_options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;anon&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>One exception to the “lazy” execution model is the take command, which executes the code immediately to process the first few objects. Here we take just the first object, and then save it to file.</p>
+<p>Take a look at how complicated these objects are: <a class="reference external" href="https://github.com/sidatasciencelab/siopenaccess/blob/master/saam_metadata_example.json">saam_metadata_example.json</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">saam_example</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;saam_metadata_example.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_out</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">saam_example</span><span class="p">,</span> <span class="n">json_out</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#This interactive JSON viewer only works correctly in Jupyter Lab</span>
+
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">JSON</span>
+<span class="n">display</span><span class="p">(</span><span class="n">JSON</span><span class="p">(</span><span class="n">saam_example</span><span class="p">,</span> <span class="n">expanded</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;IPython.core.display.JSON object&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Because of how complicated each individual record is, we need to create a Python function to pull out the pieces of data that we want to store and/or filter on later.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="n">record</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Take a single SAAM metadata record, and pulls out specific pieces of data.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    record : dict</span>
+<span class="sd">        A single SAAM metadata record in highly-nested dictionary format.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    flattened_record: dict</span>
+<span class="sd">        An un-nested dictionary that only contains the record id, unit code,</span>
+<span class="sd">        object title, media_count, media_id, topic list, object type, and</span>
+<span class="sd">        object medium.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">flattened_record</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">flattened_record</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+    <span class="n">flattened_record</span><span class="p">[</span><span class="s1">&#39;unitCode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="s1">&#39;unitCode&#39;</span><span class="p">]</span>
+    <span class="n">flattened_record</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span>
+    <span class="n">media_count</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;descriptiveNonRepeating&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;online_media&#39;</span><span class="p">,{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mediaCount&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="n">flattened_record</span><span class="p">[</span><span class="s1">&#39;media_count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">media_count</span><span class="p">)</span>
+    <span class="n">media</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;descriptiveNonRepeating&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;online_media&#39;</span><span class="p">,{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;media&#39;</span><span class="p">,[])</span>   
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">media</span><span class="p">):</span>
+        <span class="n">flattened_record</span><span class="p">[</span><span class="s1">&#39;media_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">media</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;idsId&#39;</span><span class="p">]</span>
+        
+    <span class="n">topics</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;indexedStructured&#39;</span><span class="p">,{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;topic&#39;</span><span class="p">,[])</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">topics</span><span class="p">):</span>
+        <span class="n">flattened_record</span><span class="p">[</span><span class="s1">&#39;topics&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">topics</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="s1">&#39;freetext&#39;</span> <span class="ow">in</span> <span class="n">record</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="s1">&#39;objectType&#39;</span> <span class="ow">in</span> <span class="n">record</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="s1">&#39;freetext&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">obtype</span> <span class="ow">in</span> <span class="n">record</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="s1">&#39;freetext&#39;</span><span class="p">][</span><span class="s1">&#39;objectType&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">obtype</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Type&#39;</span><span class="p">:</span>
+                    <span class="n">flattened_record</span><span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">obtype</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;physicalDescription&#39;</span> <span class="ow">in</span> <span class="n">record</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="s1">&#39;freetext&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">phys</span> <span class="ow">in</span> <span class="n">record</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="s1">&#39;freetext&#39;</span><span class="p">][</span><span class="s1">&#39;physicalDescription&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">phys</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Medium&#39;</span><span class="p">:</span>
+                    <span class="n">flattened_record</span><span class="p">[</span><span class="s1">&#39;medium&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">phys</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;name&#39;</span> <span class="ow">in</span> <span class="n">record</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="s1">&#39;freetext&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">record</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="s1">&#39;freetext&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">name</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Artist&#39;</span><span class="p">:</span>
+                    <span class="n">flattened_record</span><span class="p">[</span><span class="s1">&#39;artist&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;date&#39;</span> <span class="ow">in</span> <span class="n">record</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="s1">&#39;freetext&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">record</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="s1">&#39;freetext&#39;</span><span class="p">][</span><span class="s1">&#39;date&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">date</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Date&#39;</span><span class="p">:</span>
+                    <span class="n">flattened_record</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">])</span>
+            
+    <span class="k">return</span> <span class="n">flattened_record</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we test out this <code class="docutils literal notranslate"><span class="pre">flatten</span></code> function by passing it the single record we pulled out earlier with the <code class="docutils literal notranslate"><span class="pre">take</span></code> command. You can see how it converted the highly-nested format into a single level dictionary with only a few pieces of information.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flattened_example</span> <span class="o">=</span> <span class="n">flatten</span><span class="p">(</span><span class="n">saam_example</span><span class="p">)</span>
+<span class="n">flattened_example</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;id&#39;: &#39;edanmdm-saam_1929.8.175.19&#39;,
+ &#39;unitCode&#39;: &#39;SAAM&#39;,
+ &#39;title&#39;: &#39;Necklace&#39;,
+ &#39;media_count&#39;: 1.0,
+ &#39;media_id&#39;: &#39;SAAM-1929.8.175.19_1&#39;,
+ &#39;object_type&#39;: &#39;Decorative Arts-Jewelry&#39;,
+ &#39;medium&#39;: &#39;faience and glass&#39;,
+ &#39;artist&#39;: &#39;Unidentified&#39;,
+ &#39;date&#39;: &#39;100 B.C.-100 A.D.&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we send all 12,542 metadata records through the <code class="docutils literal notranslate"><span class="pre">flatten</span></code> function with the Dask <code class="docutils literal notranslate"><span class="pre">map</span></code> function, and ensure that the command is actually executed by using the <code class="docutils literal notranslate"><span class="pre">compute</span></code> function. Since <code class="docutils literal notranslate"><span class="pre">flatten</span></code> returns a single-level dictionary, we can convert the results of into a table using the <code class="docutils literal notranslate"><span class="pre">to_dataframe</span></code> function. Then we run <code class="docutils literal notranslate"><span class="pre">head</span></code> to look at the first 5 rows of this table.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">saam_json</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">flatten</span><span class="p">)</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+<span class="n">saam_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">saam_json</span><span class="p">)</span>
+<span class="n">saam_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>unitCode</th>
+      <th>title</th>
+      <th>media_count</th>
+      <th>media_id</th>
+      <th>object_type</th>
+      <th>medium</th>
+      <th>artist</th>
+      <th>date</th>
+      <th>topics</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>edanmdm-saam_1929.8.175.19</td>
+      <td>SAAM</td>
+      <td>Necklace</td>
+      <td>1.0</td>
+      <td>SAAM-1929.8.175.19_1</td>
+      <td>Decorative Arts-Jewelry</td>
+      <td>faience and glass</td>
+      <td>Unidentified</td>
+      <td>100 B.C.-100 A.D.</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>edanmdm-saam_1998.160.3</td>
+      <td>SAAM</td>
+      <td>Untitled from "Atlantic and Great Western Rail...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Photography-Photoprint</td>
+      <td>albumen silver print</td>
+      <td>J. F. Ryder, born Ithaca, NY 1826-died Clevela...</td>
+      <td>1860</td>
+      <td>Bridges|Atlantic and Great Western Railroad|Ra...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>edanmdm-saam_1996.63.144</td>
+      <td>SAAM</td>
+      <td>A Boston Watering-Cart, from Ballou's Pictoria...</td>
+      <td>1.0</td>
+      <td>SAAM-1996.63.144_1</td>
+      <td>Graphic Arts-Print</td>
+      <td>wood engraving on paper</td>
+      <td>Winslow Homer, born Boston, MA 1836-died Prout...</td>
+      <td>1857</td>
+      <td>Commercial|Architecture|Occupations|Street swe...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>edanmdm-saam_2000.47.13</td>
+      <td>SAAM</td>
+      <td>Gentleman in Brown Velvet with Patterned Waist...</td>
+      <td>1.0</td>
+      <td>SAAM-2000.47.13_1</td>
+      <td>Photography-Photoprint</td>
+      <td>salted paper print with applied color</td>
+      <td>Unidentified</td>
+      <td>ca. 1848</td>
+      <td>Figure male</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>edanmdm-saam_1929.6.46</td>
+      <td>SAAM</td>
+      <td>Head of a Young Girl</td>
+      <td>1.0</td>
+      <td>SAAM-1929.6.46_1</td>
+      <td>Painting-Miniature</td>
+      <td>watercolor on ivory</td>
+      <td>Lucia Fairchild Fuller, born Boston, MA 1870-d...</td>
+      <td>ca. 1900</td>
+      <td>Women|Portraits</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Taking a look at the structure of the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> dataframe, we can see that some of the data fields are null.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">saam_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 12901 entries, 0 to 12900
+Data columns (total 10 columns):
+ #   Column       Non-Null Count  Dtype  
+---  ------       --------------  -----  
+ 0   id           12901 non-null  object 
+ 1   unitCode     12901 non-null  object 
+ 2   title        12901 non-null  object 
+ 3   media_count  12224 non-null  float64
+ 4   media_id     12224 non-null  object 
+ 5   object_type  12901 non-null  object 
+ 6   medium       12459 non-null  object 
+ 7   artist       12593 non-null  object 
+ 8   date         10944 non-null  object 
+ 9   topics       11528 non-null  object 
+dtypes: float64(1), object(9)
+memory usage: 1008.0+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s3_media_saam</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="s1">&#39;smithsonian-open-access/media/saam&#39;</span><span class="p">)</span>
+<span class="n">s3_media_saam_ids</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">s3_path</span> <span class="ow">in</span> <span class="n">s3_media_saam</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">s3_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.jpg&#39;</span><span class="p">):</span>
+        <span class="n">edan_id</span> <span class="o">=</span> <span class="n">s3_path</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;.jpg&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">s3_media_saam_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">edan_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s3_media_saam_ids</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15681
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">saam_df</span> <span class="o">=</span> <span class="n">saam_df</span><span class="p">[</span><span class="n">saam_df</span><span class="p">[</span><span class="s1">&#39;media_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">s3_media_saam_ids</span><span class="p">)]</span>
+<span class="n">saam_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Int64Index: 12045 entries, 0 to 12900
+Data columns (total 10 columns):
+ #   Column       Non-Null Count  Dtype  
+---  ------       --------------  -----  
+ 0   id           12045 non-null  object 
+ 1   unitCode     12045 non-null  object 
+ 2   title        12045 non-null  object 
+ 3   media_count  12045 non-null  float64
+ 4   media_id     12045 non-null  object 
+ 5   object_type  12045 non-null  object 
+ 6   medium       11692 non-null  object 
+ 7   artist       11866 non-null  object 
+ 8   date         10261 non-null  object 
+ 9   topics       11177 non-null  object 
+dtypes: float64(1), object(9)
+memory usage: 1.0+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s look at the most common “object_type” and “medium” combinations amongst all SAAM works of art. We can see that the most common type of art is a painting created with oil on canvas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">saam_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span><span class="s1">&#39;medium&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>object_type             medium                          
+Painting                oil on canvas                       1647
+                        watercolor on paper                  849
+Drawing                 pencil on paper                      648
+Graphic Arts-Print      wood engraving on paper              440
+Drawing                 drawing                              354
+Painting-Miniature      watercolor on ivory                  350
+Photography-Photoprint  albumen silver print                 264
+Graphic Arts-Print      lithograph                           238
+                        etching on paper                     213
+Drawing                 pencil                               199
+Sculpture               plaster                              198
+Graphic Arts-Print      etching                              191
+Decorative Arts-Glass   glass                                171
+Painting                watercolor                           143
+Graphic Arts-Print      engraving                            139
+Painting                oil on wood                          133
+Graphic Arts-Print      hand-colored lithograph on paper     114
+                        lithograph on paper                  112
+                        wood engraving                       111
+Painting                watercolor and pencil on paper       111
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since works of art have multiple topics listed, it is slightly more complicated to look at the most common topics.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_topics</span><span class="p">(</span><span class="n">topic_column</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Take the &#39;|&#39;-concatenated column from a pandas dataframe, and expand</span>
+<span class="sd">    it into a Counter object to see the most common individual topics.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    topic_column : pandas Series</span>
+<span class="sd">        A column from a metadata table. It is expected that multiple topics</span>
+<span class="sd">        are separated with a pipe symbol.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    topic_counts: Counter</span>
+<span class="sd">        A Python Counter object of each unique topic, and the number of times</span>
+<span class="sd">        that it is listed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">topic_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">topics_entries</span> <span class="o">=</span> <span class="n">topic_column</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">topics_entry</span> <span class="ow">in</span> <span class="n">topics_entries</span><span class="p">:</span>
+        <span class="n">topics</span> <span class="o">=</span> <span class="n">topics_entry</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">topics</span><span class="p">):</span>
+            <span class="n">topic_list</span> <span class="o">+=</span> <span class="n">topics</span>
+    <span class="n">topic_counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">topic_list</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">topic_counts</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Out of 12,542 works of art, there are 4,016 unique topics totally 56,927 total topics listed. We can see that “Landscapes” is the most common topic.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">topic_counts</span> <span class="o">=</span> <span class="n">count_topics</span><span class="p">(</span><span class="n">saam_df</span><span class="p">[</span><span class="s1">&#39;topics&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">topic_counts</span><span class="p">))</span>
+<span class="n">topic_counts</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4013
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Landscapes&#39;, 3361),
+ (&#39;Architecture&#39;, 2495),
+ (&#39;Portraits&#39;, 2417),
+ (&#39;Figure group&#39;, 2197),
+ (&#39;Men&#39;, 1958),
+ (&#39;Occupations&#39;, 1518),
+ (&#39;Ethnicity&#39;, 1377),
+ (&#39;Animals&#39;, 1352),
+ (&#39;Figure female&#39;, 1123),
+ (&#39;Women&#39;, 1052),
+ (&#39;Clothing and dress&#39;, 1003),
+ (&#39;Figure male&#39;, 810),
+ (&#39;Botanical study&#39;, 775),
+ (&#39;Religion&#39;, 745),
+ (&#39;Domestic&#39;, 718),
+ (&#39;Nudity&#39;, 696),
+ (&#39;Cityscapes&#39;, 633),
+ (&#39;Recreation&#39;, 562),
+ (&#39;Dress accessories&#39;, 559),
+ (&#39;Children&#39;, 517)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since 11,561 images is a lot to process, let’s try to filter out all art that include people.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">include_topics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Landscapes&#39;</span><span class="p">,</span><span class="s1">&#39;Architecture&#39;</span><span class="p">,</span><span class="s1">&#39;Animals&#39;</span><span class="p">]</span>
+<span class="n">exclude_topics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Portraits&#39;</span><span class="p">,</span><span class="s1">&#39;Nudity&#39;</span><span class="p">,</span><span class="s1">&#39;Ethnicity&#39;</span><span class="p">,</span><span class="s1">&#39;Men&#39;</span><span class="p">,</span><span class="s1">&#39;Women&#39;</span><span class="p">,</span><span class="s1">&#39;Children&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Figure male&#39;</span><span class="p">,</span><span class="s1">&#39;Figure female&#39;</span><span class="p">,</span><span class="s1">&#39;Figure group&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;Botanical study&#39;</span><span class="p">]</span>
+<span class="n">include_regex</span> <span class="o">=</span> <span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">include_topics</span><span class="p">)</span>
+<span class="n">exclude_regex</span> <span class="o">=</span> <span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">exclude_topics</span><span class="p">)</span>
+<span class="n">filtered_df</span> <span class="o">=</span> <span class="n">saam_df</span><span class="p">[(</span><span class="n">saam_df</span><span class="p">[</span><span class="s1">&#39;topics&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">include_regex</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="kc">False</span><span class="p">))</span> <span class="o">&amp;</span> \
+                 <span class="p">(</span><span class="o">~</span><span class="n">saam_df</span><span class="p">[</span><span class="s1">&#39;topics&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">exclude_regex</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="kc">False</span><span class="p">))]</span>
+<span class="n">filtered_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>unitCode</th>
+      <th>title</th>
+      <th>media_count</th>
+      <th>media_id</th>
+      <th>object_type</th>
+      <th>medium</th>
+      <th>artist</th>
+      <th>date</th>
+      <th>topics</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>18</th>
+      <td>edanmdm-saam_1929.6.144</td>
+      <td>SAAM</td>
+      <td>The Brook, Greenwich, Connecticut</td>
+      <td>1.0</td>
+      <td>SAAM-1929.6.144_1</td>
+      <td>Painting</td>
+      <td>oil on canvas</td>
+      <td>John Henry Twachtman, born Cincinnati, OH 1853...</td>
+      <td>ca. 1890-1900</td>
+      <td>Landscapes|Rivers|Greenwich</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>edanmdm-saam_1983.83.171</td>
+      <td>SAAM</td>
+      <td>Rhine at the Lurlei</td>
+      <td>1.0</td>
+      <td>SAAM-1983.83.171_1</td>
+      <td>Drawing</td>
+      <td>pencil on paper</td>
+      <td>George Elbert Burr, born Monroe Falls, OH 1859...</td>
+      <td>1900</td>
+      <td>Lurlei|Landscapes|Art|Rhine River|Rivers</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>edanmdm-saam_1991.56.271</td>
+      <td>SAAM</td>
+      <td>Nanfio</td>
+      <td>1.0</td>
+      <td>SAAM-1991.56.271_1</td>
+      <td>Drawing</td>
+      <td>pencil on paper</td>
+      <td>Miner Kilbourne Kellogg, born Manlius Square, ...</td>
+      <td>1843</td>
+      <td>Mountains|Landscapes</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>edanmdm-saam_1967.136.6</td>
+      <td>SAAM</td>
+      <td>Mountains in Colorado</td>
+      <td>1.0</td>
+      <td>SAAM-1967.136.6_1</td>
+      <td>Painting</td>
+      <td>oil on paper mounted on paperboard</td>
+      <td>John Frederick Kensett, born Cheshire, CT 1816...</td>
+      <td>1870</td>
+      <td>Mountains|Western|Landscapes|Rocks</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>edanmdm-saam_1983.83.55</td>
+      <td>SAAM</td>
+      <td>Untitled (transfer drawing for Storm near Timb...</td>
+      <td>1.0</td>
+      <td>SAAM-1983.83.55_1</td>
+      <td>Drawing</td>
+      <td>pencil on paper</td>
+      <td>George Elbert Burr, born Monroe Falls, OH 1859...</td>
+      <td>ca. 1922</td>
+      <td>Trees|Western|Weather|Landscapes|Storms|Rocks</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>After running this filter step, we are left with 1,573 unique topics from 2,816 works of art.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">filtered_df</span><span class="p">))</span>
+<span class="n">filtered_topics</span> <span class="o">=</span> <span class="n">count_topics</span><span class="p">(</span><span class="n">filtered_df</span><span class="p">[</span><span class="s1">&#39;topics&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">filtered_topics</span><span class="p">))</span>
+<span class="n">filtered_topics</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2808
+1574
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Landscapes&#39;, 1969),
+ (&#39;Architecture&#39;, 1190),
+ (&#39;Animals&#39;, 625),
+ (&#39;Mountains&#39;, 378),
+ (&#39;Rivers&#39;, 315),
+ (&#39;Trees&#39;, 293),
+ (&#39;Cityscapes&#39;, 284),
+ (&#39;Boats and boating&#39;, 261),
+ (&#39;Domestic&#39;, 261),
+ (&#39;Waterscapes&#39;, 233),
+ (&#39;Religion&#39;, 224),
+ (&#39;Detail&#39;, 189),
+ (&#39;Dwellings&#39;, 174),
+ (&#39;Birds&#39;, 163),
+ (&#39;Coasts&#39;, 141),
+ (&#39;Time&#39;, 126),
+ (&#39;Water&#39;, 122),
+ (&#39;Weather&#39;, 121),
+ (&#39;Seasons&#39;, 119),
+ (&#39;Roads&#39;, 111)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, let’s limit our search to only paintings. This gives us a target set of 808 images to download and process.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filtered_paintings</span> <span class="o">=</span> <span class="n">filtered_df</span><span class="p">[(</span><span class="n">filtered_df</span><span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Painting&#39;</span><span class="p">)</span> <span class="o">&amp;</span>
+                                 <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">notnull</span><span class="p">(</span><span class="n">filtered_df</span><span class="p">[</span><span class="s1">&#39;media_id&#39;</span><span class="p">]))]</span>
+<span class="n">filtered_paintings</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>unitCode</th>
+      <th>title</th>
+      <th>media_count</th>
+      <th>media_id</th>
+      <th>object_type</th>
+      <th>medium</th>
+      <th>artist</th>
+      <th>date</th>
+      <th>topics</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>18</th>
+      <td>edanmdm-saam_1929.6.144</td>
+      <td>SAAM</td>
+      <td>The Brook, Greenwich, Connecticut</td>
+      <td>1.0</td>
+      <td>SAAM-1929.6.144_1</td>
+      <td>Painting</td>
+      <td>oil on canvas</td>
+      <td>John Henry Twachtman, born Cincinnati, OH 1853...</td>
+      <td>ca. 1890-1900</td>
+      <td>Landscapes|Rivers|Greenwich</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>edanmdm-saam_1967.136.6</td>
+      <td>SAAM</td>
+      <td>Mountains in Colorado</td>
+      <td>1.0</td>
+      <td>SAAM-1967.136.6_1</td>
+      <td>Painting</td>
+      <td>oil on paper mounted on paperboard</td>
+      <td>John Frederick Kensett, born Cheshire, CT 1816...</td>
+      <td>1870</td>
+      <td>Mountains|Western|Landscapes|Rocks</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>edanmdm-saam_1984.50</td>
+      <td>SAAM</td>
+      <td>The Departure of the Crusaders</td>
+      <td>1.0</td>
+      <td>SAAM-1984.50_2</td>
+      <td>Painting</td>
+      <td>oil on canvas</td>
+      <td>Victor Nehlig, born Paris, France 1830-died Ne...</td>
+      <td>1863</td>
+      <td>Bishop|Crusades|Architecture|Procession|Occupa...</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>edanmdm-saam_1958.5.3</td>
+      <td>SAAM</td>
+      <td>Above Tower Falls, Yellowstone</td>
+      <td>1.0</td>
+      <td>SAAM-1958.5.3_1</td>
+      <td>Painting</td>
+      <td>watercolor and gouache on paper</td>
+      <td>Thomas Moran, born Bolton, England 1837-died S...</td>
+      <td>1872</td>
+      <td>Yellowstone National Park|Landscapes|Tower Fal...</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>edanmdm-saam_1983.95.91</td>
+      <td>SAAM</td>
+      <td>Untitled (landscape with trees and two cows in...</td>
+      <td>1.0</td>
+      <td>SAAM-1983.95.91_1</td>
+      <td>Painting</td>
+      <td>oil on canvas</td>
+      <td>Edward Mitchell Bannister, born St. Andrews, N...</td>
+      <td>1895</td>
+      <td>Trees|Weather|Landscapes|Animals|Cattle|Cloud|...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filtered_paintings</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;saam_painting_metadata.tsv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">painting_ids</span> <span class="o">=</span> <span class="n">filtered_paintings</span><span class="p">[</span><span class="s1">&#39;media_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">painting_ids</span><span class="p">))</span>
+<span class="n">painting_ids</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>821
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;SAAM-1929.6.144_1&#39;,
+ &#39;SAAM-1967.136.6_1&#39;,
+ &#39;SAAM-1984.50_2&#39;,
+ &#39;SAAM-1958.5.3_1&#39;,
+ &#39;SAAM-1983.95.91_1&#39;,
+ &#39;SAAM-1973.150_1&#39;,
+ &#39;SAAM-1985.66.385_1&#39;,
+ &#39;SAAM-1909.7.51_1&#39;,
+ &#39;SAAM-1974.69.14_1&#39;,
+ &#39;SAAM-1978.68_1&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="download-image-files-from-s3">
+<h2>Download image files from S3<a class="headerlink" href="#download-image-files-from-s3" title="Permalink to this headline">¶</a></h2>
+<p>This section of the demo can actually be skipped, since the GitHub repository already has all thumbnails included, and this is the slowest part of the demo (around 4 minutes).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">download_thumbnail</span><span class="p">(</span><span class="n">edan_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Opens a full-size image from S3, compresses it to thumbnail, and writes </span>
+<span class="sd">    it to disk. Harcoded for SAAM images, and to save to saam_thumbnails directory.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    edan_id : string</span>
+<span class="sd">        The Smithsonian Enterprise Digital Asset Network (EDAN) ID of the object</span>
+<span class="sd">        to download.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">thumb_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+    <span class="n">s3_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;smithsonian-open-access/media/saam/</span><span class="si">{</span><span class="n">edan_id</span><span class="si">}</span><span class="s1">.jpg&#39;</span>
+    <span class="n">file_dest</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;saam_thumbnails/</span><span class="si">{</span><span class="n">edan_id</span><span class="si">}</span><span class="s1">.jpg&#39;</span>
+    <span class="k">with</span> <span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">s3_url</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">s3_image</span><span class="p">:</span>
+        <span class="n">pil_image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">s3_image</span><span class="p">)</span>
+        <span class="n">pil_image</span><span class="o">.</span><span class="n">thumbnail</span><span class="p">(</span><span class="n">thumb_size</span><span class="p">)</span>
+        <span class="n">pil_image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">file_dest</span><span class="p">)</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Un-comment the code block below (by removing the # at the beginning of each line) if you would like to run this download step anyways.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#start = time.time()</span>
+<span class="c1">#futures = client.map(download_thumbnail, painting_ids)</span>
+<span class="c1">#results = client.gather(futures)</span>
+<span class="c1">#end = time.time()</span>
+<span class="c1">#print(end - start)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">downloaded_images</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;saam_thumbnails/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*.jpg&#39;</span><span class="p">)</span>
+<span class="n">downloaded_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">image_file</span><span class="o">.</span><span class="n">stem</span> <span class="k">for</span> <span class="n">image_file</span> <span class="ow">in</span> <span class="n">downloaded_images</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">downloaded_ids</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>821
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="producing-image-feature-vectors-with-tensorflow">
+<h2>Producing image feature vectors with TensorFlow<a class="headerlink" href="#producing-image-feature-vectors-with-tensorflow" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have all of our painting images downloaded into the “saam_thumbnails” directory, we can do some processing on them.</p>
+<p>For this demonstration, we will attempt to use a broad machine learning technique called “unsupervised learning” (<a class="reference external" href="https://en.wikipedia.org/wiki/Unsupervised_learning">https://en.wikipedia.org/wiki/Unsupervised_learning</a>) to cluster similar images together, and learn a little bit about our collection.</p>
+<p>Specifically, we will be using a pre-trained photographic image classifier called MobileNetV2 (<a class="reference external" href="https://arxiv.org/abs/1801.04381">https://arxiv.org/abs/1801.04381</a>) to extract a numerical “feature vector” representation of each image, which can then be used to calculate image-to-image distances. We will then feed those vectors into the UMAP (<a class="reference external" href="https://arxiv.org/abs/1802.03426">https://arxiv.org/abs/1802.03426</a>) algorithm, which reduces our multi-thousand dimensional feature space down to an easy-to-interpret 2-dimensional representation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">umap</span> <span class="kn">import</span> <span class="n">UMAP</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">minmax_scale</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<p>First, we use the TensorFlow Keras deep learning library to load the pre-trained MobileNetV2 ImageNet image classification model. This model was trained on the ImageNet (<a class="reference external" href="https://en.wikipedia.org/wiki/ImageNet">https://en.wikipedia.org/wiki/ImageNet</a>) benchmark image dataset that contains millions of photographic images from 1000 labeled categories. This model consists of over 150 connected “layers” (this is where the deep in deep learning comes from) that each performs computational transformations on the image data to eventually return a prediction of which label category an image belongs to. The final layer, called “predictions” in the summary output below, takes the numerical representation of the image and provides “probabilities” for each of the 1000 category classes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mobilenet_base</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">applications</span><span class="o">.</span><span class="n">MobileNetV2</span><span class="p">(</span><span class="n">include_top</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                                                   <span class="n">weights</span><span class="o">=</span><span class="s1">&#39;imagenet&#39;</span><span class="p">,</span> 
+                                                   <span class="n">pooling</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">layer_strings</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">mobilenet_base</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">print_fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">layer_strings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">layer_strings</span><span class="p">[:</span><span class="mi">15</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">...</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">layer_strings</span><span class="p">[</span><span class="o">-</span><span class="mi">15</span><span class="p">:]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;mobilenetv2_1.00_224&quot;
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_1 (InputLayer)            [(None, 224, 224, 3) 0                                            
+__________________________________________________________________________________________________
+Conv1_pad (ZeroPadding2D)       (None, 225, 225, 3)  0           input_1[0][0]                    
+__________________________________________________________________________________________________
+Conv1 (Conv2D)                  (None, 112, 112, 32) 864         Conv1_pad[0][0]                  
+__________________________________________________________________________________________________
+bn_Conv1 (BatchNormalization)   (None, 112, 112, 32) 128         Conv1[0][0]                      
+__________________________________________________________________________________________________
+Conv1_relu (ReLU)               (None, 112, 112, 32) 0           bn_Conv1[0][0]                   
+__________________________________________________________________________________________________
+expanded_conv_depthwise (Depthw (None, 112, 112, 32) 288         Conv1_relu[0][0]                 
+
+...
+
+__________________________________________________________________________________________________
+Conv_1 (Conv2D)                 (None, 7, 7, 1280)   409600      block_16_project_BN[0][0]        
+__________________________________________________________________________________________________
+Conv_1_bn (BatchNormalization)  (None, 7, 7, 1280)   5120        Conv_1[0][0]                     
+__________________________________________________________________________________________________
+out_relu (ReLU)                 (None, 7, 7, 1280)   0           Conv_1_bn[0][0]                  
+__________________________________________________________________________________________________
+global_average_pooling2d (Globa (None, 1280)         0           out_relu[0][0]                   
+__________________________________________________________________________________________________
+predictions (Dense)             (None, 1000)         1281000     global_average_pooling2d[0][0]   
+==================================================================================================
+Total params: 3,538,984
+Trainable params: 3,504,872
+Non-trainable params: 34,112
+__________________________________________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, for the use case of clustering, we’re not necessarily after the classifications. So we remove the final layer from the model, and save this new model as “mobilenet_features”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mobilenet_features</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">mobilenet_base</span><span class="o">.</span><span class="n">input</span><span class="p">,</span> 
+                                    <span class="n">outputs</span><span class="o">=</span><span class="n">mobilenet_base</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we create a Python function that will take an image path, resize the image to the specified MobileNetV2 input size (224 x 224 pixels), and then convert it to a 3-dimensional matrix of values (a 2-dimensional pixel value matrix for the Red, Green, and Blue color “channels” of each image).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">path_to_array</span><span class="p">(</span><span class="n">image_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads in an image from disk, resizes it using the Pillow library, converts</span>
+<span class="sd">    it to a Numpy array, and then runs MobileNetV2-specific preprocessing.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    image_path : string</span>
+<span class="sd">        Local file path to an image file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    im: Numpy array</span>
+<span class="sd">        A processed Numpy array that is ready to be fed into the MobileNetV2</span>
+<span class="sd">        Keras model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pil_image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">224</span><span class="p">,</span><span class="mi">224</span><span class="p">),</span> <span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span>
+    <span class="n">np_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pil_image</span><span class="p">)</span>
+    <span class="n">np_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">np_image</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">applications</span><span class="o">.</span><span class="n">mobilenet_v2</span><span class="o">.</span><span class="n">preprocess_input</span><span class="p">(</span><span class="n">np_image</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">im</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we run all of our images through this model and then “stack” all of these image matrices together into a single matrix, so that we can take advantage of the model’s batch prediction functionality. Finally, we feed this image matrix into the “mobilenet_features” predict function to return a 1280-value “feature vector” interpretation of the input image.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">image_id</span> <span class="ow">in</span> <span class="n">downloaded_ids</span><span class="p">:</span>
+    <span class="n">painting_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;saam_thumbnails/</span><span class="si">{</span><span class="n">image_id</span><span class="si">}</span><span class="s1">.jpg&#39;</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">path_to_array</span><span class="p">(</span><span class="n">painting_path</span><span class="p">)</span>
+    <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    
+<span class="n">image_stack</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+<span class="n">feature_vector</span> <span class="o">=</span> <span class="n">mobilenet_features</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">image_stack</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19.595715045928955
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see we now have an 808 (1 entry for each of 808 filtered paintings) x 1280 (from the MobileNetV2 feature vector) matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feature_vector</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(821, 1280)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;saam_painting_feature_vectors.npy&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">np_out</span><span class="p">:</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">np_out</span><span class="p">,</span> <span class="n">feature_vector</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="clustering-images-with-umap">
+<h2>Clustering images with UMAP<a class="headerlink" href="#clustering-images-with-umap" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have 808 feature vectors, we can process them with the UMAP algorithm to cluster similar images together. We can see in this graph, which plots each image as a semi-transparent point on a scatterplot, that there are certain areas where many paintings cluster very closely together.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">embedding</span> <span class="o">=</span> <span class="n">UMAP</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> 
+                 <span class="n">min_dist</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> 
+                 <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;correlation&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">feature_vector</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">embedding</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">embedding</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x199150940&gt;
+</pre></div>
+</div>
+<img alt="_images/SI Open Access SAAM S3 Example_68_1.png" src="_images/SI Open Access SAAM S3 Example_68_1.png" />
+</div>
+</div>
+<p>Next, we take these image “locations” from the UMAP output, and convert these into a normalized table.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">embedding_normalized</span> <span class="o">=</span> <span class="n">minmax_scale</span><span class="p">(</span><span class="n">embedding</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">embedding_normalized</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">downloaded_ids</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>SAAM-2000.50_1</th>
+      <td>0.501237</td>
+      <td>0.866469</td>
+    </tr>
+    <tr>
+      <th>SAAM-1983.95.90_2</th>
+      <td>0.663565</td>
+      <td>0.900818</td>
+    </tr>
+    <tr>
+      <th>SAAM-1977.1.7_1</th>
+      <td>0.688433</td>
+      <td>0.893116</td>
+    </tr>
+    <tr>
+      <th>SAAM-1929.6.76_2</th>
+      <td>0.858971</td>
+      <td>0.766468</td>
+    </tr>
+    <tr>
+      <th>SAAM-1985.66.389_1</th>
+      <td>0.942690</td>
+      <td>0.358713</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>SAAM-1985.66.395_1</th>
+      <td>0.880546</td>
+      <td>0.401467</td>
+    </tr>
+    <tr>
+      <th>SAAM-1970.12_1</th>
+      <td>0.656449</td>
+      <td>0.374689</td>
+    </tr>
+    <tr>
+      <th>SAAM-1970.290_1</th>
+      <td>0.606480</td>
+      <td>0.488596</td>
+    </tr>
+    <tr>
+      <th>SAAM-1985.66.499_1</th>
+      <td>0.505421</td>
+      <td>0.908665</td>
+    </tr>
+    <tr>
+      <th>SAAM-1980.133.17_2</th>
+      <td>0.391035</td>
+      <td>0.436601</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Next, we create a 2500 x 5000 pixel blank “canvas” and then convert those UMAP locations into canvas locations, where we “paste” each of our painting images.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CANVAS_HEIGHT</span> <span class="o">=</span> <span class="mi">2500</span>
+<span class="n">CANVAS_WIDTH</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="n">canvas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">CANVAS_HEIGHT</span><span class="o">+</span><span class="mi">500</span><span class="p">,</span><span class="n">CANVAS_WIDTH</span><span class="o">+</span><span class="mi">500</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="mi">255</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+
+<span class="n">THUMBNAIL_SIZE</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span><span class="mi">500</span>
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">itertuples</span><span class="p">():</span>
+    <span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;saam_thumbnails&#39;</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">Index</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.jpg&#39;</span>
+    <span class="n">x_pos</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">CANVAS_WIDTH</span><span class="p">)</span>
+    <span class="n">y_pos</span> <span class="o">=</span> <span class="n">CANVAS_HEIGHT</span> <span class="o">-</span> <span class="nb">round</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">CANVAS_HEIGHT</span><span class="p">)</span>
+
+    <span class="n">pil_image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+    <span class="n">pil_image</span><span class="o">.</span><span class="n">thumbnail</span><span class="p">(</span><span class="n">THUMBNAIL_SIZE</span><span class="p">)</span>
+    <span class="n">np_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pil_image</span><span class="p">)</span>
+    <span class="n">canvas</span><span class="p">[</span><span class="n">y_pos</span><span class="p">:</span><span class="n">np_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">y_pos</span><span class="p">,</span>
+           <span class="n">x_pos</span><span class="p">:</span><span class="n">np_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">x_pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">np_image</span>    
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">canvas</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x1991b8a30&gt;
+</pre></div>
+</div>
+<img alt="_images/SI Open Access SAAM S3 Example_73_1.png" src="_images/SI Open Access SAAM S3 Example_73_1.png" />
+</div>
+</div>
+<p>That tiny plot in this notebook is hard to see clearly, so let’s output it to file so that we can zoom in on the details … and maybe print out a poster if you like.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">saam_umap</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">canvas</span><span class="p">)</span>
+<span class="n">saam_umap</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;saam_umap.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="searching-for-semantically-similar-paintings-using-annoy">
+<h2>Searching for semantically similar paintings using Annoy<a class="headerlink" href="#searching-for-semantically-similar-paintings-using-annoy" title="Permalink to this headline">¶</a></h2>
+<p>Now that we’ve “vectorized” the 808 SAAM paintings using the MobileNetV2 model, we can use these vectors as representatives to search against. This type of search can be done using a nearest neighbor algorithm. Specifically, Spotify has implemented this algorithm for quickly matching similar song vectors. They have open sourced this implementation, called Annoy (Approximate Nearest Neighbors Oh Yeah), as a Python library.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">annoy</span> <span class="kn">import</span> <span class="n">AnnoyIndex</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will use the AnnoyIndex functionality to produce a feature vector search index from the vectors we produced earlier.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">painting_index</span> <span class="o">=</span> <span class="n">AnnoyIndex</span><span class="p">(</span><span class="mi">1280</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;angular&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">feature</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">feature_vector</span><span class="p">):</span>
+    <span class="n">painting_index</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">feature</span><span class="p">)</span>
+<span class="n">painting_index</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1">#Build index with 10 trees</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ok, now that we have a search index built, let’s find another image to search against it. For this example, I’ll go back to the original flattened dataset we created (of over 12,000 objects), before we filtered to landscape paintings. Let’s try to find some photos of Yosemite.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yosemite_photos</span> <span class="o">=</span> <span class="n">saam_df</span><span class="p">[(</span><span class="n">saam_df</span><span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Photography-Photoprint&#39;</span><span class="p">)</span> <span class="o">&amp;</span>
+                           <span class="p">(</span><span class="n">saam_df</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;yosemite&#39;</span><span class="p">))]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">yosemite_photos</span><span class="p">))</span>
+<span class="n">yosemite_photos</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>unitCode</th>
+      <th>title</th>
+      <th>media_count</th>
+      <th>media_id</th>
+      <th>object_type</th>
+      <th>medium</th>
+      <th>artist</th>
+      <th>date</th>
+      <th>topics</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>42</th>
+      <td>edanmdm-saam_1994.91.281</td>
+      <td>SAAM</td>
+      <td>The Vernal and Nevada Falls, from Glacier Poin...</td>
+      <td>1.0</td>
+      <td>SAAM-1994.91.281_1</td>
+      <td>Photography-Photoprint</td>
+      <td>albumen silver print</td>
+      <td>Isaiah West Taber, born Bedford, MA 1830-died ...</td>
+      <td>ca. 1870, printed ca. 1875</td>
+      <td>Landscapes|Vernal Falls|Waterfalls|Bird's eye ...</td>
+    </tr>
+    <tr>
+      <th>1588</th>
+      <td>edanmdm-saam_1994.89.1</td>
+      <td>SAAM</td>
+      <td>Valley of the Yosemite from Union Point</td>
+      <td>1.0</td>
+      <td>SAAM-1994.89.1_1</td>
+      <td>Photography-Photoprint</td>
+      <td>albumen silver print</td>
+      <td>Eadweard Muybridge, born Kingston-upon-Thames,...</td>
+      <td>1872</td>
+      <td>Landscapes|Yosemite Valley|Valleys|Rivers|Merc...</td>
+    </tr>
+    <tr>
+      <th>2442</th>
+      <td>edanmdm-saam_1994.91.283</td>
+      <td>SAAM</td>
+      <td>Yosemite Falls, Reflected</td>
+      <td>1.0</td>
+      <td>SAAM-1994.91.283_1</td>
+      <td>Photography-Photoprint</td>
+      <td>albumen silver print</td>
+      <td>Isaiah West Taber, born Bedford, MA 1830-died ...</td>
+      <td>ca. 1870, printed ca. 1875</td>
+      <td>Landscapes|Waterfalls|Yosemite Falls|Parks</td>
+    </tr>
+    <tr>
+      <th>3103</th>
+      <td>edanmdm-saam_2009.36.2</td>
+      <td>SAAM</td>
+      <td>Mirror Lake, Yosemite Valley, California</td>
+      <td>1.0</td>
+      <td>SAAM-2009.36.2_1</td>
+      <td>Photography-Photoprint</td>
+      <td>albumen silver print</td>
+      <td>Charles Roscoe Savage, born Southampton, Engla...</td>
+      <td>1888</td>
+      <td>Landscapes|Yosemite Valley|Lakes|Mirror Lake</td>
+    </tr>
+    <tr>
+      <th>3251</th>
+      <td>edanmdm-saam_1994.91.279</td>
+      <td>SAAM</td>
+      <td>Half Dome, Yosemite, California</td>
+      <td>1.0</td>
+      <td>SAAM-1994.91.279_1</td>
+      <td>Photography-Photoprint</td>
+      <td>albumen silver print</td>
+      <td>Isaiah West Taber, born Bedford, MA 1830-died ...</td>
+      <td>ca. 1870, printed ca. 1875</td>
+      <td>Mountains|Landscapes|Half Dome|Parks</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>There are 13 matching open access photos, but let’s grab the Mirror Lake photo by Charles Roscoe Savage (EDAN ID of SAAM-2009.36.2_1). We can use the</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">edan_id</span> <span class="o">=</span> <span class="s1">&#39;SAAM-2009.36.2_1&#39;</span>
+
+<span class="n">thumb_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">s3_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;smithsonian-open-access/media/saam/</span><span class="si">{</span><span class="n">edan_id</span><span class="si">}</span><span class="s1">.jpg&#39;</span>
+<span class="n">query_image</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;test_image.jpg&#39;</span>
+<span class="k">with</span> <span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">s3_url</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">s3_image</span><span class="p">:</span>
+    <span class="n">pil_image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">s3_image</span><span class="p">)</span>
+    <span class="n">pil_image</span><span class="o">.</span><span class="n">thumbnail</span><span class="p">(</span><span class="n">thumb_size</span><span class="p">)</span>
+    <span class="n">pil_image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">query_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">display</span>
+
+<span class="n">display</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="n">query_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/SI Open Access SAAM S3 Example_85_0.jpg" src="_images/SI Open Access SAAM S3 Example_85_0.jpg" />
+</div>
+</div>
+<p>The first thing we’ll need to do is produce a 1280 MobileNetV2 feature vector for this image.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query_array</span> <span class="o">=</span> <span class="n">path_to_array</span><span class="p">(</span><span class="n">query_image</span><span class="p">)</span>
+<span class="n">query_vector</span> <span class="o">=</span> <span class="n">mobilenet_features</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">query_array</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+<span class="n">query_vector</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1280,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">closest_3</span> <span class="o">=</span> <span class="n">painting_index</span><span class="o">.</span><span class="n">get_nns_by_vector</span><span class="p">(</span><span class="n">query_vector</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span>
+                                            <span class="n">include_distances</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">closest_ids</span><span class="p">,</span> <span class="n">closest_distances</span> <span class="o">=</span> <span class="n">closest_3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">closest_ids</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">closest_distances</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[116, 100, 675]
+[0.7721788287162781, 0.7895978093147278, 0.7987999320030212]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.image</span> <span class="k">as</span> <span class="nn">mpimg</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">media_order</span> <span class="ow">in</span> <span class="n">closest_ids</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">painting_ids</span><span class="p">[</span><span class="n">media_order</span><span class="p">])</span>
+    <span class="n">match_image</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;saam_thumbnails/</span><span class="si">{</span><span class="n">downloaded_ids</span><span class="p">[</span><span class="n">media_order</span><span class="p">]</span><span class="si">}</span><span class="s1">.jpg&#39;</span>
+    <span class="n">mpl_img</span> <span class="o">=</span> <span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">match_image</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mpl_img</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SAAM-1962.13.59_1
+</pre></div>
+</div>
+<img alt="_images/SI Open Access SAAM S3 Example_90_1.png" src="_images/SI Open Access SAAM S3 Example_90_1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SAAM-1962.13.8_1
+</pre></div>
+</div>
+<img alt="_images/SI Open Access SAAM S3 Example_90_3.png" src="_images/SI Open Access SAAM S3 Example_90_3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SAAM-1967.6.14_1
+</pre></div>
+</div>
+<img alt="_images/SI Open Access SAAM S3 Example_90_5.png" src="_images/SI Open Access SAAM S3 Example_90_5.png" />
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The Jupyter Book community<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
